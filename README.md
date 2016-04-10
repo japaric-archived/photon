@@ -1,3 +1,5 @@
+[![Travis](https://travis-ci.org/japaric/photon.svg?branch=master)](https://travis-ci.org/japaric/photon)
+
 # `photon`
 
 > Cargo project template to get you started with the [particle] [photon].
