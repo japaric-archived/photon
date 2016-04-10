@@ -1,0 +1,25 @@
+{
+    "arch": "arm",
+    "llvm-target": "thumbv7m-none-eabi",
+    "os": "none",
+    "target-endian": "little",
+    "target-pointer-width": "32",
+
+    "cpu": "cortex-m3",
+    "executables": true,
+    "morestack": false,
+    "no-compiler-rt": true,
+    "no-default-libraries": false,
+    "pre-link-args": [
+        "-Tlinker.ld",
+        ".photon/user_module.o",
+        ".photon/module_info.o",
+        ".photon/user_export.o",
+        ".photon/newlib_stubs.o",
+        "-Wl,--defsym,USER_FIRMWARE_IMAGE_SIZE=0x20000",
+        "-Wl,--defsym,USER_FIRMWARE_IMAGE_LOCATION=0x80A0000",
+        "-mcpu=cortex-m3",
+        "-mthumb",
+        "-nostartfiles"
+    ]
+}
