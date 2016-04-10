@@ -1,0 +1,16 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+script:
+  - bash ci.sh
+
+branches:
+  only: master
+
+notifications:
+  email:
+    on_success: never
