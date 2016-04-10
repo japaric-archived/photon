@@ -11,8 +11,7 @@ main() {
         git clone --depth 1 https://github.com/japaric/photon
         cd photon
         xargo build --release --verbose
-        arm-none-eabi-size $(find target/photon/release -type f -executable)
-        arm-none-eabi-objdump -CD $(find target/photon/release -type f -executable)
+        arm-none-eabi-size $(find target/photon/release -maxdepth 1 -type f -executable)
     '
 }
 
