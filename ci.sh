@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 main() {
     local tag=2016-04-10
 
