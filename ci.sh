@@ -7,7 +7,7 @@ main() {
 
     docker run japaric/photon:$tag bash -ex -c '
         rustup default nightly
-        cargo install --git https://github.com/japaric/xargo
+        cargo install xargo
         git clone --depth 1 https://github.com/japaric/photon
         cd photon
         xargo build --release --verbose
