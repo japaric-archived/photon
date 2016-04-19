@@ -95,10 +95,9 @@ fn install(td: &Path, out_dir: &Path) {
     println!("cargo:rustc-link-search={}", dst.display());
 
     // Object files
-    // FIXME we shouldn't pollute the current directory BUT there is no search directory for object
-    // files so we need pass them to the linker by relative/absolute path
+    // XXX This will break when the user changes the 'target-dir' value in .cargo/config
     let src = td.join("build/target/user-part/platform-6-m/src");
-    let dst = &env::current_dir().unwrap().join(".photon");
+    let dst = &project_root().join("target/photon");
 
     rm_rf(dst);
     mkdir_p(dst);
@@ -180,4 +179,21 @@ fn mkdir_p<D>(dir: D)
     where D: AsRef<Path>
 {
     try!(fs::create_dir_all(dir.as_ref()));
+}
+
+fn project_root() -> PathBuf {
+    let mut current = &*try!(env::current_dir());
+
+    loop {
+        if fs::metadata(current.join("Cargo.toml")).is_ok() {
+            return current.to_owned();
+        }
+
+        match current.parent() {
+            Some(p) => current = p,
+            None => break,
+        }
+    }
+
+    panic!("not in a Cargo project");
 }
