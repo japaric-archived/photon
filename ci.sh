@@ -5,6 +5,7 @@ set -ex
 main() {
     local tag=2016-04-10
 
+    chmod -R a+w .
     docker run -v $(pwd):/mnt -w /mnt japaric/photon:$tag bash -ex -c '
         rustup default nightly
         cargo install xargo
