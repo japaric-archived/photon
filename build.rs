@@ -99,7 +99,6 @@ fn install(td: &Path, out_dir: &Path) {
     let src = td.join("build/target/user-part/platform-6-m/src");
     let dst = &project_root().join("target/photon");
 
-    rm_rf(dst);
     mkdir_p(dst);
 
     cp(src.join("user_module.o"), dst);
