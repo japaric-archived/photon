@@ -9,7 +9,9 @@ script:
   - bash ci.sh
 
 branches:
-  only: master
+  only:
+    - auto
+    - master
 
 notifications:
   email:
