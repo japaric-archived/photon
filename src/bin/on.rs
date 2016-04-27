@@ -4,19 +4,22 @@
 
 #![no_std]
 
+extern crate particle_hal as hal;
 extern crate photon;
 
-use photon::{Pin, PinMode, PinState};
+use hal::gpio::{self, Enum_PinMode, pin_t};
+
+const D7: pin_t = 7;
 
 #[no_mangle]
-pub fn setup() {
-    photon::pin_mode(Pin::D7, PinMode::Output);
-    photon::digital_write(Pin::D7, PinState::High);
+pub unsafe extern "C" fn setup() {
+    gpio::HAL_Pin_Mode(D7, Enum_PinMode::OUTPUT);
+    gpio::HAL_GPIO_Write(D7, 1);
 }
 
 #[no_mangle]
 #[export_name = "loop"]
-pub fn loopy() {
+pub unsafe extern "C" fn loopy() {
 }
 
 // required by rust executables, but unused by our application

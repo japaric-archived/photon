@@ -6,3 +6,6 @@ version = "0.1.0"
 
 [build-dependencies]
 tempdir = "0.3.4"
+
+[dependencies.particle-hal]
+git = "https://github.com/japaric/particle-hal"
