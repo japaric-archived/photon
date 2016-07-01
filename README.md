@@ -31,31 +31,42 @@ $ docker run -it japaric/photon:2016-04-10
 ```
 # Write your app in the `src/bin` or `src/examples` folder
 $ cat src/bin/blink.rs
+```
+
+``` rust
 //! Blink the blue LED (D7)
+
+#![deny(warnings)]
 
 #![no_std]
 
+extern crate particle_hal as hal;
 extern crate photon;
 
-use photon::{Pin, PinMode, PinState};
+use hal::gpio::{self, Enum_PinMode, pin_t};
+use hal::delay;
+
+const D7: pin_t = 7;
 
 #[no_mangle]
-pub fn setup() {
-    photon::pin_mode(Pin::D7, PinMode::Output)
+pub unsafe extern "C" fn setup() {
+    gpio::HAL_Pin_Mode(D7, Enum_PinMode::OUTPUT);
 }
 
 #[no_mangle]
 #[export_name = "loop"]
-pub fn loopy() {
-    photon::digital_write(Pin::D7, PinState::Low);
-    photon::delay(250);
-    photon::digital_write(Pin::D7, PinState::High);
-    photon::delay(250);
+pub unsafe extern "C" fn loopy() {
+    gpio::HAL_GPIO_Write(D7, 0);
+    delay::HAL_Delay_Milliseconds(250);
+    gpio::HAL_GPIO_Write(D7, 1);
+    delay::HAL_Delay_Milliseconds(250);
 }
 
 // required by rust executables, but unused by our application
 fn main() {}
+```
 
+```
 # Build your app -- you get an ELF file back
 # This may take a while (a few minutes) the first time because we have to build spark/firmware.
 # and a sysroot! Subsequent calls should be way faster!
@@ -70,7 +81,7 @@ $ arm-none-eabi-size target/photon/release/blink
       6004    1068     188    7260    1c5c target/photon/release/blink
 
 # Turn the ELF file into a binary for deploy
-# binarify.sh also computes the CRC and write it into the binary
+# binarify.sh also computes the CRC and writes it into the binary
 $ ./binarify.sh target/photon/release/blink
 
 # Ship the app to the Photon
