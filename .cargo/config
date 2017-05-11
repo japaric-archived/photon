@@ -1,5 +1,0 @@
-[build]
-target = "photon"
-
-[target.photon]
-linker = "arm-none-eabi-gcc"

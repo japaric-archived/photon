@@ -1,11 +1,6 @@
 [package]
-authors = ["Jorge Aparicio <japaricious@gmail.com>"]
-build = "build.rs"
+authors = ["Jorge Aparicio <jorge@japaric.io>"]
 name = "photon"
 version = "0.1.0"
 
-[build-dependencies]
-tempdir = "0.3.4"
-
-[dependencies.particle-hal]
-git = "https://github.com/japaric/particle-hal"
+[dependencies]
