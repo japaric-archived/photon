@@ -1,9 +1,9 @@
 language: rust
-rust: nightly
 
 matrix:
   include:
     - env: TARGET=thumbv7em-none-eabi
+      rust: nightly
 
 before_install: set -e
 
