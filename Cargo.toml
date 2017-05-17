@@ -4,3 +4,4 @@ name = "photon"
 version = "0.1.0"
 
 [dependencies]
+photon-core = { git = "https://github.com/japaric/photon-core" }
