@@ -12,7 +12,7 @@ the [photon-quickstart](https://github.com/japaric/photon-quickstart) template.
 # Generating binary blobs
 
 ```
-$ cd docker && docker build -t photon-builder
+$ cd docker && docker build -t photon-builder . && cd ..
 
 $ git clone https://github.com/spark/firmware
 
