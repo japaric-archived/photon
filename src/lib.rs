@@ -12,7 +12,7 @@ pub use photon_core::{App, Cloud, Resource};
 
 #[macro_export]
 macro_rules! app {
-    (setup: $setup:ident, loop: $loop:ident,) => {
+    (setup: $setup:ident,loop: $loop:ident,) => {
         fn main() {}
 
         pub mod __impl {
@@ -36,5 +36,5 @@ macro_rules! app {
                 ::$loop(app);
             }
         }
-    }
+    };
 }

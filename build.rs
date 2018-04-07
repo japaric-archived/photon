@@ -71,8 +71,7 @@ fn cp(src: &str, dst_dir: &Path) {
     fs::create_dir_all(dst_dir).ok();
 
     let filename = Path::new(src).file_name().unwrap();
-    let src = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap())
-        .join(src);
+    let src = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap()).join(src);
 
     fs::copy(src, dst_dir.join(filename)).unwrap();
 }
